@@ -1,0 +1,34 @@
+package lazada;
+
+import java.lang.reflect.*;
+
+import org.openqa.selenium.*;
+import org.testng.annotations.*;
+
+import libextend.ExcelUtils;
+
+public class TestData {
+	
+	@DataProvider(name="dataLogin")
+	public Object[][] validateEmailExcel(Method name) throws Exception {
+		//Object[][] obj = new Object[1][1];
+		
+		String filePath = "../TestData.xlsx";
+		String sheetName = "";
+		int startRow = 0;
+		int endRow = 0;
+		int startCol = 0;
+		int endCol = 0;
+		
+		if(name.getName().equals("loginForm")) {
+			sheetName = "2. Đăng nhập";
+			startRow = 9;
+			endRow = 16;
+			startCol = 0;
+			endCol = 5;
+			
+		}
+		return ExcelUtils.getTableArray(sheetName, startRow, endRow, startCol, endCol);
+		
+	}
+}

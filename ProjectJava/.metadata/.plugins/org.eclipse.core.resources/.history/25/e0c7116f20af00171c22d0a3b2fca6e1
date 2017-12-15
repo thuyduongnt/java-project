@@ -1,0 +1,52 @@
+package lazada;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.*;
+import org.testng.annotations.*;
+
+public class RegisterFunction {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void InitTest() {
+		System.setProperty("webdriver.chrome.driver", "E:\\AutomationTest\\Tools\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@BeforeMethod
+	public void BeforeMethod() {
+		String baseURL = "https://www.lazada.vn/customer/account/create";
+		driver.get(baseURL);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+	/*
+	@Test(priority=1, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void CheckPolicyLink(String policylink, String ExpectedTitle) {
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(policylink)));
+		
+		WebElement link = driver.findElement(By.linkText(policylink));
+		link.click();
+		
+		String ActualTitle = driver.getTitle();
+		
+		Assert.assertEquals(ActualTitle, ExpectedTitle);
+	}
+	*/
+	@Test
+	public void check() {
+		WebElement link = driver.findElement(By.linkText("chính sách"));
+		link.click();
+	}
+	
+	@AfterTest
+	public void AfterTest() {
+		driver.quit();
+	}
+}

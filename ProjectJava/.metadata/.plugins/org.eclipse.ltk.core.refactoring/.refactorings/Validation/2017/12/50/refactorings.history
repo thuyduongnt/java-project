@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ExcelUtils.java&apos; to &apos;POM Lazada/src/libextend&apos;&#x0D;&#x0A;- Original project: &apos;Validation&apos;&#x0D;&#x0A;- Destination element: &apos;POM Lazada/src/libextend&apos;&#x0D;&#x0A;- Original element: &apos;dataprovider.ExcelUtils.java&apos;" description="Copy compilation unit" destination="=POM Lazada/src&lt;libextend" element1="/src&lt;dataprovider{ExcelUtils.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1513267564374" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+	<parameter name="username" value="duongntt"></parameter>
+  <test name="Test">
+    <groups>
+    	<run>
+    		<include name="V1"/>
+    	</run>
+    </groups>
+    <classes>
+      <class name="NewTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

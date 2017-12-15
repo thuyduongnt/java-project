@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <groups>
+      <run>
+        <include name="Check1"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="lazada.LoginFunction">
+        <methods>
+          <include name="LoginLazada" invocation-numbers="0 1 2 3 4 5"/>
+          <include name="testLinkRegister"/>
+          <include name="testLinkForgotPassword"/>
+        </methods>
+      </class> <!-- lazada.LoginFunction -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

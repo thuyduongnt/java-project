@@ -1,0 +1,93 @@
+package lazada;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.*;
+import org.testng.annotations.*;
+
+public class Home {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void initTest() {
+		System.setProperty("webdriver.chrome.driver", "E:\\AutomationTest\\Tools\\chromedriver(1).exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@BeforeMethod
+	public void beforeMethod() {
+		String baseURL = "http://lazada.vn/";
+		driver.get(baseURL);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+	
+	/*
+	@Test(priority=1)
+	public void CheckGetTheApp() {
+		WebElement gettheapp = driver.findElement(By.cssSelector("span.l-top-bar__item-caption"));
+		gettheapp.click();
+		
+		String expectedTitle = "Mua sắm với khuyến mãi sốc khi sử dụng App Mobile tại Lazada";
+		String actualTitle = driver.getTitle(); 
+		
+		Assert.assertEquals(actualTitle, expectedTitle);
+	}
+	
+	@Test(priority=2, dataProvider="dataHomepage", dataProviderClass=TestData.class)
+	public void TestLinkTopNavigate(String linktest, String expectedTitle) {
+		List<WebElement> listTopNavLink = driver.findElements(By.cssSelector("a.l-top-bar__item-caption"));
+		
+		for(WebElement nav : listTopNavLink) {
+			if(nav.getText().equalsIgnoreCase(linktest)==true) {
+				nav.click();
+				System.out.println("--Title: " + driver.getTitle());
+				if(driver.getTitle().equals(expectedTitle)==false) {
+					File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+					try {
+						FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\Homepage\\home_link_error(" + linktest + ").jpg"));
+					}
+					catch(IOException e){
+						e.printStackTrace();
+					}
+				}
+				Assert.assertEquals(driver.getTitle(), expectedTitle, "Lỗi khi click link: " + linktest);
+				break;
+			}
+		}
+	}
+	*/
+	
+	@Test(priority=3, dataProvider="dataHomepage", dataProviderClass=TestData.class)
+	public void CheckDisplayPopup(String text) {
+		List<WebElement> listDropdown = driver.findElements(By.cssSelector("div.l-top-bar__item"));
+		for(WebElement lst : listDropdown) {
+			if(lst.getText().equals(text)) {
+				lst.click();
+				
+				Boolean isDisplay = driver.findElement(By.cssSelector("div.l-dropdown_active")).isDisplayed();
+				
+				Assert.assertTrue(isDisplay==false, "Không hiển thị dropdownlist Chăm sóc khách hàng");
+				
+				break;
+			}
+		}
+	}
+	
+	
+	@Test(priority=4)
+	public void CheckLinkCustomerCare() {
+		
+	}
+	
+	@AfterTest
+	public void finishTest() {
+		driver.quit();
+	}
+}

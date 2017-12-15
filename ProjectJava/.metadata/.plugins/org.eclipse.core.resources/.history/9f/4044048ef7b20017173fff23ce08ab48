@@ -1,0 +1,308 @@
+package lazada;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.*;
+import org.testng.annotations.*;
+
+public class RegisterFunction {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void InitTest() {
+		System.setProperty("webdriver.chrome.driver", "E:\\AutomationTest\\Tools\\chromedriver(1).exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@BeforeMethod
+	public void BeforeMethod() {
+		String baseURL = "https://www.lazada.vn/customer/account/create";
+		driver.get(baseURL);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+	
+	
+	@Test(priority=1, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void CheckPolicyLink(String policylink, String ExpectedTitle) {
+		String baseHandle = driver.getWindowHandle();
+		String handle = "";
+		
+		WebElement link = driver.findElement(By.linkText(policylink));
+		link.click();
+		
+		for(String elHandle : driver.getWindowHandles()) {
+			handle = elHandle;
+		}
+		driver.switchTo().window(handle);
+		
+		String ActualTitle = driver.getTitle();
+		
+		Assert.assertEquals(ActualTitle, ExpectedTitle);
+		
+		driver.switchTo().window(baseHandle);
+	}
+	
+	@Test(priority=2, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void CheckRequireField(String fieldname, String msg) {
+		WebElement btnRegister = driver.findElement(By.id("send"));
+		btnRegister.click();
+		
+		List<WebElement> listFormRows = driver.findElements(By.className("ui-formRow"));
+		for(WebElement e : listFormRows) {
+			WebElement colLeft = e.findElement(By.cssSelector("div.col1"));
+			WebElement colRight = e.findElement(By.cssSelector("div.col2"));
+			Boolean isRequire = colLeft.findElements(By.xpath("./label/span")).size()>0;
+			
+			if(isRequire == true) {
+				String fieldName = colLeft.findElement(By.cssSelector("label.required")).getText();
+				if(fieldName == fieldname) {
+					WebElement txtInput = colRight.findElement(By.tagName("input"));
+					String classError = txtInput.getAttribute("class");
+					
+					WebElement error = colRight.findElement(By.className("s-error"));
+					String messageError = error.getText();
+					
+					Assert.assertTrue(classError.indexOf("error") != -1, "Thiếu class error trên input");
+					Assert.assertEquals(messageError, msg, "Thông báo lỗi sai");
+				}
+			}
+		}
+	}
+	
+	
+	@Test(priority=3, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void CheckEmailFormat(String testEmail, String msg) {
+		WebElement txtEmail = driver.findElement(By.id("RegistrationForm_email"));
+		txtEmail.clear();
+		txtEmail.sendKeys(testEmail);
+		
+		WebElement btnRegister = driver.findElement(By.id("send"));
+		btnRegister.click();
+		
+		WebElement txtMessage = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_email\"]/following::div[@class=\"s-error\"]"));
+		Assert.assertEquals(txtMessage.getText(), msg);
+	}
+	
+	
+	@Test(priority=4, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void CheckPasswordFormat(String testpassword, String msg1, String msg2) {
+		WebElement txtPassword1 = driver.findElement(By.id("RegistrationForm_password"));
+		txtPassword1.clear();
+		txtPassword1.sendKeys(testpassword);
+		
+		WebElement txtPassword2 = driver.findElement(By.id("RegistrationForm_password2"));
+		txtPassword2.clear();
+		txtPassword2.sendKeys(testpassword);
+		
+		WebElement btnRegister = driver.findElement(By.id("send"));
+		btnRegister.click();
+		
+		WebElement message1 = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_password\"]/following::div[@class=\"s-error\"]"));
+		Assert.assertEquals(message1.getText(), msg1);
+		
+		WebElement message2 = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_password2\"]/following::div[@class=\"s-error\"]"));
+		Assert.assertEquals(message2.getText(), msg2);
+	}
+	
+	
+	@Test(priority=5, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void RegisterForm(String testemail, String msgemail, String testname, String msgname, String testpassword1, String msg1, String testpassword2, String msg2) {
+		WebElement txtEmail = driver.findElement(By.id("RegistrationForm_email"));
+		txtEmail.clear();
+		txtEmail.sendKeys(testemail);
+		
+		WebElement txtName = driver.findElement(By.id("RegistrationForm_first_name"));
+		txtName.clear();
+		txtName.sendKeys(testname);
+		
+		WebElement txtPassword1 = driver.findElement(By.id("RegistrationForm_password"));
+		txtPassword1.clear();
+		txtPassword1.sendKeys(testpassword1);
+		
+		WebElement txtPassword2 = driver.findElement(By.id("RegistrationForm_password2"));
+		txtPassword2.clear();
+		txtPassword2.sendKeys(testpassword2);
+		
+		WebElement btnRegister = driver.findElement(By.id("send"));
+		btnRegister.click();
+		
+		if(msgemail!="") {
+			WebElement txtMessage = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_email\"]/following::div[@class=\"s-error\"]"));
+			Assert.assertEquals(txtMessage.getText(), msgemail);
+		}
+		else if(msg1!="" && msg2!="") {
+			WebElement message1 = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_password\"]/following::div[@class=\"s-error\"]"));
+			WebElement message2 = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_password2\"]/following::div[@class=\"s-error\"]"));
+			
+			if(message1.getText()!=msg1 || message2.getText()!=msg2) {
+				File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+				try {
+					FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\Register\\register_expected_message_password("  + msg1 + ").jpg"));
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+			Assert.assertEquals(message1.getText(), msg1);
+			Assert.assertEquals(message2.getText(), msg2);
+		} 
+		else if(msgemail!="" && msgname!="" && msg1!="" && msg2!="") {
+			WebElement txtMessageEmail = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_email\"]/following::div[@class=\"s-error\"]"));
+			Assert.assertEquals(txtMessageEmail.getText(), msgemail);
+			
+			WebElement txtMessageName = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_first_name\"]/following::div[@class=\"s-error\"]"));
+			Assert.assertEquals(txtMessageName.getText(), msgemail);
+			
+			WebElement message1 = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_password\"]/following::div[@class=\"s-error\"]"));
+			Assert.assertEquals(message1.getText(), msg1);
+			
+			WebElement message2 = driver.findElement(By.xpath("//input[@id=\"RegistrationForm_password2\"]/following::div[@class=\"s-error\"]"));
+			Assert.assertEquals(message2.getText(), msg2);
+		}
+		else {
+			WebElement txtCheckName = driver.findElement(By.className("dropdown__toggle-text_style_ellipsis"));
+			int displayLengthName = txtCheckName.getText().length();
+			int inputLengthName = testname.length();
+			
+			if(displayLengthName > 50) {
+				File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+				try {
+					FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\Register\\register_actual_name_greater_than_50.jpg"));
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+			Assert.assertTrue((inputLengthName-displayLengthName)>=0);
+		}
+	}
+	
+	
+	@Test(priority=6, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void RegisterWithFacebook(String testemail, String password) {
+		String baseHandle = driver.getWindowHandle();
+		String handle = "";
+		
+		WebDriverWait waiter = new WebDriverWait(driver, 10);
+		waiter.until(ExpectedConditions.visibilityOfElementLocated(By.className("fb-wrapper")));
+		
+		WebElement btnRegisterWithFacebook = driver.findElement(By.className("fb-wrapper"));
+		btnRegisterWithFacebook.click();
+		
+		for(String elHandle : driver.getWindowHandles()) {
+			handle = elHandle;
+		}
+		driver.switchTo().window(handle);
+		
+		WebElement txtEmail = driver.findElement(By.id("email"));
+		txtEmail.clear();
+		txtEmail.sendKeys(testemail);
+		
+		WebElement txtPassword = driver.findElement(By.id("pass"));
+		txtPassword.clear();
+		txtPassword.sendKeys(password);
+		
+		WebElement btnLogin = driver.findElement(By.id("u_0_0"));
+		btnLogin.click();
+		/*
+		WebDriverWait waiter1 = new WebDriverWait(driver, 10);
+		waiter1.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button._51sy")));
+		
+		WebElement btnAllow = driver.findElement(By.cssSelector("button._51sy"));
+		btnAllow.click();
+		*/
+		driver.switchTo().window(baseHandle);
+		
+		WebDriverWait waiter2 = new WebDriverWait(driver, 10);
+		waiter2.until(ExpectedConditions.titleIs("Lazada - My account"));
+		
+		String actualTitle = driver.getTitle();
+		String expectedTitle = "Lazada - My account";
+		
+		if(actualTitle.compareTo(expectedTitle)!=0) {
+			File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			try {
+				FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\Register\\cannot_register_with_facebook.jpg"));
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+		else {
+			Assert.assertEquals(actualTitle, expectedTitle);
+
+			WebElement account = driver.findElement(By.cssSelector("p.dropdown__toggle_type_text"));
+			account.click();
+			
+			WebElement ddlLogout = driver.findElement(By.linkText("Đăng xuất"));
+			ddlLogout.click();
+		}
+		
+	}
+	
+	
+	@Test(priority=7, dataProvider="dataRegister", dataProviderClass=TestData.class)
+	public void RegisterWithGoogle(String testemail, String password) {
+		String baseHandle = driver.getWindowHandle();
+		String handle = "";
+		
+		WebElement btnRegisterWithGoogle = driver.findElement(By.id("google-login-button"));
+		btnRegisterWithGoogle.click();
+
+		for(String elHandle : driver.getWindowHandles()) {
+			handle = elHandle;
+		}
+		driver.switchTo().window(handle);
+		
+		WebElement txtEmail = driver.findElement(By.id("identifierId"));
+		txtEmail.clear();
+		txtEmail.sendKeys(testemail);
+		
+		WebElement btnNext1 = driver.findElement(By.cssSelector("span.snByac"));
+		btnNext1.click();
+		
+		WebDriverWait waiter1 = new WebDriverWait(driver, 10);
+		waiter1.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+		
+		WebElement txtPassword = driver.findElement(By.name("password"));
+		txtPassword.clear();
+		txtPassword.sendKeys(password);
+		
+		WebElement btnNext2 = driver.findElement(By.cssSelector("span.snByac"));
+		btnNext2.click();
+		
+		driver.switchTo().window(baseHandle);
+		
+		WebDriverWait waiter2 = new WebDriverWait(driver, 15);
+		waiter2.until(ExpectedConditions.titleIs("Lazada - My account"));
+		
+		String actualTitle = driver.getTitle();
+		String expectedTitle = "Lazada - My account";
+		
+		if(actualTitle.compareTo(expectedTitle) != 0) {
+			File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			try {
+				FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\Register\\cannot_register_with_google.jpg"));
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+		Assert.assertEquals(actualTitle, expectedTitle);
+	}
+	
+	
+	@AfterTest
+	public void AfterTest() {
+		driver.quit();
+	}
+}

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="1" ignored="0" total="15" passed="14">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="175994" started-at="2017-08-13T09:21:12Z" finished-at="2017-08-13T09:24:08Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="175994" started-at="2017-08-13T09:21:12Z" finished-at="2017-08-13T09:24:08Z">
+      <class name="appiumdemo.RegisterLazada">
+        <test-method status="PASS" signature="initTest()[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="initTest" is-config="true" duration-ms="8592" started-at="2017-08-13T16:21:12Z" finished-at="2017-08-13T16:21:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initTest -->
+        <test-method status="PASS" signature="testFullName(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="testFullName" duration-ms="14332" started-at="2017-08-13T16:21:21Z" data-provider="data" finished-at="2017-08-13T16:21:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mục này còn thiếu]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFullName -->
+        <test-method status="PASS" signature="testFullName(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="testFullName" duration-ms="13097" started-at="2017-08-13T16:21:35Z" data-provider="data" finished-at="2017-08-13T16:21:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[duongntt]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFullName -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="7859" started-at="2017-08-13T16:21:48Z" data-provider="data" finished-at="2017-08-13T16:21:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mục này còn thiếu]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="11125" started-at="2017-08-13T16:21:56Z" data-provider="data" finished-at="2017-08-13T16:22:07Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[thuyduonghp@]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Vui lòng nhập một email hợp lệ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="10357" started-at="2017-08-13T16:22:07Z" data-provider="data" finished-at="2017-08-13T16:22:17Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[thuyduonghp@hotmail]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Vui lòng nhập một email hợp lệ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="10622" started-at="2017-08-13T16:22:17Z" data-provider="data" finished-at="2017-08-13T16:22:28Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[thuyduonghp@hotmail.]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Vui lòng nhập một email hợp lệ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="11116" started-at="2017-08-13T16:22:28Z" data-provider="data" finished-at="2017-08-13T16:22:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[thuyduonghp@hotmail.c]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Vui lòng nhập một email hợp lệ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="10571" started-at="2017-08-13T16:22:39Z" data-provider="data" finished-at="2017-08-13T16:22:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[thuyduonghphotmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Vui lòng nhập một email hợp lệ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validateEmail(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validateEmail" duration-ms="10217" started-at="2017-08-13T16:22:50Z" data-provider="data" finished-at="2017-08-13T16:23:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[thuyduonghp@hotmail.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateEmail -->
+        <test-method status="PASS" signature="validatePassword(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validatePassword" duration-ms="7786" started-at="2017-08-13T16:23:00Z" data-provider="data" finished-at="2017-08-13T16:23:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mục này còn thiếu]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePassword -->
+        <test-method status="PASS" signature="validatePassword(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validatePassword" duration-ms="10737" started-at="2017-08-13T16:23:08Z" data-provider="data" finished-at="2017-08-13T16:23:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[123]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mật khẩu phải chứa ít nhất 6 ký tự]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePassword -->
+        <test-method status="FAIL" signature="validatePassword(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validatePassword" duration-ms="10745" started-at="2017-08-13T16:23:18Z" data-provider="data" finished-at="2017-08-13T16:23:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[abc abc]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mật khẩu phải chứa ít nhất một chữ và số.]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [Mật khẩu phải chứa ít nhất một chữ và số.] but found [Mật khẩu phải chứa ít nhất một chữ và số]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [Mật khẩu phải chứa ít nhất một chữ và số.] but found [Mật khẩu phải chứa ít nhất một chữ và số]
+	at org.testng.Assert.fail(Assert.java:93)
+	at org.testng.Assert.failNotEquals(Assert.java:512)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:134)
+	at org.testng.Assert.assertEquals(Assert.java:115)
+	at org.testng.Assert.assertEquals(Assert.java:189)
+	at org.testng.Assert.assertEquals(Assert.java:199)
+	at appiumdemo.RegisterLazada.validatePassword(RegisterLazada.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePassword -->
+        <test-method status="PASS" signature="validatePassword(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validatePassword" duration-ms="10916" started-at="2017-08-13T16:23:29Z" data-provider="data" finished-at="2017-08-13T16:23:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[123 123]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mật khẩu phải chứa ít nhất một chữ và số.]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePassword -->
+        <test-method status="PASS" signature="validatePassword(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validatePassword" duration-ms="10736" started-at="2017-08-13T16:23:40Z" data-provider="data" finished-at="2017-08-13T16:23:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[123ab]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Mật khẩu phải chứa ít nhất 6 ký tự]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePassword -->
+        <test-method status="PASS" signature="validatePassword(java.lang.String, java.lang.String)[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="validatePassword" duration-ms="10334" started-at="2017-08-13T16:23:51Z" data-provider="data" finished-at="2017-08-13T16:24:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[abc123   ]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validatePassword -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:appiumdemo.RegisterLazada@4c70fda8]" name="afterTest" is-config="true" duration-ms="6786" started-at="2017-08-13T16:24:01Z" finished-at="2017-08-13T16:24:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- appiumdemo.RegisterLazada -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

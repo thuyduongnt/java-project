@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="2" failed="0" ignored="0" total="2" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="6666" started-at="2017-12-14T16:21:42Z" finished-at="2017-12-14T16:21:49Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="6666" started-at="2017-12-14T16:21:42Z" finished-at="2017-12-14T16:21:49Z">
+      <class name="lazada.LoginFunction">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:lazada.LoginFunction@12f41634]" name="beforeTest" is-config="true" duration-ms="3773" started-at="2017-12-14T23:21:42Z" finished-at="2017-12-14T23:21:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="SKIP" signature="checkActiveLinks(java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:lazada.LoginFunction@12f41634]" name="checkActiveLinks" duration-ms="0" started-at="2017-12-14T23:21:46Z" data-provider="dataLogin" finished-at="2017-12-14T23:21:46Z">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[java.lang.ArrayIndexOutOfBoundsException: 2]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: java.lang.ArrayIndexOutOfBoundsException: 2at org.testng.internal.MethodInvocationHelper.invokeMethodNoCheckedException(MethodInvocationHelper.java:49)at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:131)at org.testng.internal.Parameters.handleParameters(Parameters.java:706)at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:49)at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:37)at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:914)at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)at org.testng.TestRunner.privateRun(TestRunner.java:648)at org.testng.TestRunner.run(TestRunner.java:505)at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)at org.testng.SuiteRunner.run(SuiteRunner.java:364)at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)at org.testng.TestNG.runSuites(TestNG.java:1028)at org.testng.TestNG.run(TestNG.java:996)at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)Caused by: java.lang.ArrayIndexOutOfBoundsException: 2at libextend.ExcelUtils.getTableArray(ExcelUtils.java:36)at lazada.LoginFunction.validateEmailExcel(LoginFunction.java:57)at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)at java.lang.reflect.Method.invoke(Unknown Source)at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:74)at org.testng.internal.MethodInvocationHelper.invokeMethodNoCheckedException(MethodInvocationHelper.java:45)... 22 more]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkActiveLinks -->
+        <test-method status="SKIP" signature="loginForm(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:2, instance:lazada.LoginFunction@12f41634]" name="loginForm" duration-ms="0" started-at="2017-12-14T23:21:46Z" data-provider="dataLogin" finished-at="2017-12-14T23:21:46Z">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[java.lang.ArrayIndexOutOfBoundsException: 8]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: java.lang.ArrayIndexOutOfBoundsException: 8at org.testng.internal.MethodInvocationHelper.invokeMethodNoCheckedException(MethodInvocationHelper.java:49)at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:131)at org.testng.internal.Parameters.handleParameters(Parameters.java:706)at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:49)at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:37)at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:914)at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)at org.testng.TestRunner.privateRun(TestRunner.java:648)at org.testng.TestRunner.run(TestRunner.java:505)at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)at org.testng.SuiteRunner.run(SuiteRunner.java:364)at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)at org.testng.TestNG.runSuitesSequentially(TestNG.java:1187)at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)at org.testng.TestNG.runSuites(TestNG.java:1028)at org.testng.TestNG.run(TestNG.java:996)at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)Caused by: java.lang.ArrayIndexOutOfBoundsException: 8at libextend.ExcelUtils.getTableArray(ExcelUtils.java:36)at lazada.LoginFunction.validateEmailExcel(LoginFunction.java:57)at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)at java.lang.reflect.Method.invoke(Unknown Source)at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:74)at org.testng.internal.MethodInvocationHelper.invokeMethodNoCheckedException(MethodInvocationHelper.java:45)... 22 more]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginForm -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:lazada.LoginFunction@12f41634]" name="afterTest" is-config="true" duration-ms="2188" started-at="2017-12-14T23:21:46Z" finished-at="2017-12-14T23:21:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- lazada.LoginFunction -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

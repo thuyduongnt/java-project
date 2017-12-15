@@ -1,0 +1,49 @@
+package lazada;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.*;
+import org.testng.annotations.*;
+
+public class Home {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void initTest() {
+		System.setProperty("webdriver.chrome.driver", "E:\\AutomationTest\\Tools\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@BeforeMethod
+	public void beforeMethod() {
+		String baseURL = "http://lazada.vn/";
+		driver.get(baseURL);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+	
+	@Test(dataProvider="data", dataProviderClass=TestData.class)
+	public void TestTopNavigate(String LinkTextTest, String expectedTitle) {
+		
+		List<WebElement> list = driver.findElements(By.className("c-top-bar__item"));
+		System.out.println("Number of elements: " + list.size());
+		for(WebElement ls : list) {
+			ls.click();
+			System.out.println("Link: " + driver.getCurrentUrl());
+			
+		}
+		WebElement nav = driver.findElement(By.className("c-top-bar__item"));
+		//WebElement link = nav.findElement(By.)
+		WebElement linkTest = nav.findElement(By.linkText(LinkTextTest));
+		linkTest.click();
+		Assert.assertEquals(driver.getTitle(), expectedTitle, "Lỗi khi click link: " + LinkTextTest);
+	}
+	
+	@AfterTest
+	public void finishTest() {
+		driver.quit();
+	}
+}

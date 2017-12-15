@@ -1,0 +1,170 @@
+package lazada;
+
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.rules.ExpectedException;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.*;
+import org.testng.*;
+import org.testng.annotations.*;
+
+public class LoginFunction {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void initialTest() {
+		System.setProperty("webdriver.chrome.driver", "E:\\AutomationTest\\Tools\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@BeforeMethod
+	public void beforeMethod() {
+		String baseURL = "https://www.lazada.vn/customer/account/login";
+		driver.get(baseURL);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+	
+	/*
+	@Test(priority=1)
+	public void testLinkForgotPassword() {
+		WebElement linkForgotPassword = driver.findElement(By.cssSelector("a.forgotPassword"));
+		linkForgotPassword.click();
+		
+		Assert.assertEquals(driver.getTitle(), "Lazada - Forgot password?");
+	}
+	
+	@Test(priority=2)
+	public void testLinkRegister() {
+		WebElement linkRegister = driver.findElement(By.cssSelector("a.ui-inlineBlock"));
+		linkRegister.click();
+		
+		Assert.assertEquals(driver.getTitle(), "Lazada - Create new customer account");
+	}
+	
+	
+	@Test(priority=3, dataProvider="data", dataProviderClass=TestData.class)
+	public void LoginLazada(String testEmail, String msgEmail, String testPass, String msgPass) {
+		WebElement txtEmail = driver.findElement(By.id("LoginForm_email"));
+		txtEmail.clear();
+		txtEmail.sendKeys(testEmail);
+		
+		WebElement txtPassword = driver.findElement(By.id("LoginForm_password"));
+		txtPassword.clear();
+		txtPassword.sendKeys(testPass);
+		
+		WebElement btnLogin = driver.findElement(By.cssSelector("button.ui-buttonCta"));
+		btnLogin.click();
+		
+		if(msgEmail!="") {
+			WebElement msg1 = driver.findElement(By.xpath("//input[@id=\"LoginForm_email\"]/following::div[@class=\"s-error msg\"]"));
+			Assert.assertEquals(msg1.getText(), msgEmail, "Lỗi khi nhập: " + testEmail);
+		}
+		else if(msgPass!="") {
+			WebElement msg2 = driver.findElement(By.xpath("//input[@id=\"LoginForm_password\"]/following::div[@class=\"s-error msg\"]"));
+			Assert.assertEquals(msg2.getText(), msgPass, "Lỗi khi nhập: " + testPass);
+		}
+		
+		else if(msgEmail=="" && msgPass=="") {// 
+			Assert.assertEquals(driver.getTitle(), "Lazada - My account");
+			
+			WebElement account = driver.findElement(By.cssSelector("p.dropdown__toggle_type_text"));
+			account.click();
+			
+			WebElement ddlLogout = driver.findElement(By.linkText("Đăng xuất"));
+			ddlLogout.click();
+			
+		}
+		
+	}
+	*/
+	
+	@Test(priority=4, dataProvider="data", dataProviderClass=TestData.class)
+	public void LoginWithGoogle(String username, String password) {
+		String handle1 = driver.getWindowHandle();
+		System.out.println("Base handle: " + handle1);
+		
+		String handle = "";
+		
+		WebElement btnGoogle = driver.findElement(By.id("google-login-button"));
+		btnGoogle.click();
+		
+		Set<String> allHandles = driver.getWindowHandles();
+		//System.out.println(allHandles);
+		System.out.println("==Login with Google: " + allHandles.size());
+		for(String elhandle : allHandles) {
+			handle = elhandle;
+			System.out.println("--Handle child: " + handle);
+		}
+		
+		driver.switchTo().window(handle);
+		
+		WebElement txtEmailG = driver.findElement(By.id("identifierId"));
+		txtEmailG.sendKeys(username);
+		
+		WebElement btnContinue1 = driver.findElement(By.cssSelector("span.snByac"));
+		btnContinue1.click();
+		
+		WebElement txtPassG = driver.findElement(By.name("password"));
+		txtPassG.sendKeys(password);
+		
+		WebElement btnContinue2 = driver.findElement(By.cssSelector("span.snByac"));
+		btnContinue2.click();
+		/*
+		WebElement btnAllow = driver.findElement(By.cssSelector("span.snByac"));//RveJvd snByac
+		btnAllow.click();
+		*/
+		
+		WebDriverWait waiter = new WebDriverWait(driver, 5);
+		
+		
+		//https://www.lazada.vn/customer/account/
+		
+		
+		//Assert.assertEquals(driver.getTitle(), "Lazada - My account");
+	}
+	
+	/*
+	@Test(priority=5, dataProvider="data", dataProviderClass=TestData.class)
+	public void LoginWithFacebook(String username, String password) {
+		//String handle1 = driver.getWindowHandle();
+		String handle = "";
+		
+		WebElement btnFacebook = driver.findElement(By.id("facebook-login-button"));
+		btnFacebook.click();
+		
+		Set<String> allHandles = driver.getWindowHandles();
+		System.out.println("==Login with Facebook: " + allHandles.size());
+		
+		for(String elhandle:allHandles) {
+			handle = elhandle;
+			//System.out.println("Handle: " + handle);
+		}
+		
+		driver.switchTo().window(handle);
+		
+		WebElement txtEmail = driver.findElement(By.id("email"));
+		txtEmail.sendKeys(username);
+		
+		WebElement txtPass = driver.findElement(By.id("pass"));
+		txtPass.sendKeys(password);
+		
+		WebElement btnLogin = driver.findElement(By.id("loginbutton"));
+		btnLogin.click();
+		
+		WebElement btnAllow = driver.findElement(By.name("__CONFIRM__"));
+		btnAllow.click();
+		
+		String handleCurrent = driver.getWindowHandle();
+		driver.switchTo().window(handleCurrent);
+		Assert.assertEquals(driver.getTitle(), "Lazada - My account");
+	}
+	*/
+	
+	@AfterTest
+	public void afterTest() {
+		//driver.quit();
+	}
+}

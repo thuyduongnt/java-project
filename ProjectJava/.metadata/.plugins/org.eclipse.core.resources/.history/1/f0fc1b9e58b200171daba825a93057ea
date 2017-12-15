@@ -1,0 +1,173 @@
+package lazada;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+public class ForgotPasswordFunction {
+	WebDriver driver;
+	
+	@BeforeTest
+	public void initTest() {
+		System.setProperty("webdriver.chrome.driver", "E:\\AutomationTest\\Tools\\chromedriver(1).exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
+	
+	@BeforeMethod
+	public void beforeMethod() {
+		String baseURL = "https://www.lazada.vn/customer/password/forgot/";
+		driver.get(baseURL);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	}
+	
+	/*
+	@Test(priority=1, dataProvider="dataForgotPassword", dataProviderClass=TestData.class)
+	public void CheckGoBackShopping(String linkText, String expectedTitle) {
+		WebElement link = driver.findElement(By.linkText(linkText));
+		link.click();
+		
+		Assert.assertEquals(driver.getTitle(), expectedTitle);
+	}
+	
+	@Test(priority=2, dataProvider="dataForgotPassword", dataProviderClass=TestData.class)
+	public void CheckEmailFormat(String testemail, String msg) {
+		WebElement txtEmail = driver.findElement(By.id("ForgotPasswordForm_email"));
+		txtEmail.clear();
+		txtEmail.sendKeys(testemail);
+		
+		WebElement btnSend = driver.findElement(By.className("forgot-pass-form__button"));
+		btnSend.click();
+		
+		WebElement message = driver.findElement(By.xpath("//input[@id=\"ForgotPasswordForm_email\"]/following::div[@class=\"forgot-pass-form__error hidden\"]"));
+		
+		if(message.getText().compareTo(msg)!=0) {
+			File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			try {
+				FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\ForgotPassword\\forgot_expected_message("  + msg + ") email(" + testemail + ").jpg"));
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+		
+		Assert.assertEquals(message.getText(), msg);
+	}
+	
+	
+	@Test(priority=3, dataProvider="dataForgotPassword", dataProviderClass=TestData.class)
+	public void FillEmail(String email, String msg) {
+		WebElement txtEmail = driver.findElement(By.id("ForgotPasswordForm_email"));
+		txtEmail.clear();
+		txtEmail.sendKeys(email);
+		
+		WebElement btnSend = driver.findElement(By.className("forgot-pass-form__button"));
+		btnSend.click();
+		
+		if(msg!="") {
+			String expectedTitle = "Lazada - Forgot password?";
+			
+			if(driver.getTitle()==expectedTitle) {
+				WebElement message = driver.findElement(By.xpath("//input[@id=\"ForgotPasswordForm_email\"]/following::div[@class=\"forgot-pass-form__error hidden\"]"));
+				String actualMessage = message.getText();
+				System.out.println("Actual message: " + actualMessage);
+				
+				if(actualMessage.compareTo(msg)!=0) {
+					File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+					try {
+						FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\ForgotPassword\\send_forgot_expected_message("  + msg + ") email(" + email + ").jpg"));
+					}
+					catch(IOException e){
+						e.printStackTrace();
+					}
+				}
+				Assert.assertEquals(actualMessage, msg);
+			}
+			else {
+				File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+				try {
+					FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\ForgotPassword\\send_forgot_expected_message("  + msg + ") email(" + email + ").jpg"));
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+				
+				Assert.assertEquals(driver.getTitle(), expectedTitle);
+			}
+		}
+		else {
+			String actualTitle = driver.getTitle();
+			String expectedTitle = "Lazada";
+			if(actualTitle.compareTo(expectedTitle)!=0) {
+				File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+				try {
+					FileUtils.copyFile(srcFile, new File("E:\\AutomationTest\\DoAnTotNghiep\\Image-bug-lazada\\ForgotPassword\\send_forgot_cannot_send_email_to(" + email + ").jpg"));
+				}
+				catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+			Assert.assertEquals(actualTitle, expectedTitle);
+		}
+	}
+	*/
+	
+	@Test(priority=4)
+	public void CheckReceivedEmail() {
+		String baseHandle = driver.getWindowHandle();
+		System.out.println("Base handle: " + baseHandle);
+		
+		//Login to Gmail
+		String gmailHandle = "";
+		
+		((JavascriptExecutor)driver).executeScript("window.open('about:blank','_blank');");
+		
+		for(String el : driver.getWindowHandles()) {
+			gmailHandle = el;
+		}
+		driver.switchTo().window(gmailHandle);
+		
+		driver.get("https://www.google.com/gmail/about/#");
+		
+		System.out.println("Gmail handle: " + gmailHandle);
+		
+		/*
+		WebElement signin = driver.findElement(By.className("gmail-nav__nav-link gmail-nav__nav-link__sign-in"));
+		signin.click();
+		
+		WebElement txtEmail = driver.findElement(By.id("identifierId"));
+		txtEmail.clear();
+		txtEmail.sendKeys("test2.duongntt@gmail.com");
+		
+		WebElement btnNext1 = driver.findElement(By.cssSelector("span.snByac"));
+		btnNext1.click();
+		
+		WebDriverWait waiter1 = new WebDriverWait(driver, 10);
+		waiter1.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+		
+		WebElement txtPassword = driver.findElement(By.name("password"));
+		txtPassword.clear();
+		txtPassword.sendKeys("Test#123456");
+		
+		WebElement btnNext2 = driver.findElement(By.cssSelector("span.snByac"));
+		btnNext2.click();
+		
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		*/
+		//Send - forgot password link to gmail
+		
+	}
+	
+	@AfterTest
+	public void afterTest() {
+		driver.quit();
+	}
+}

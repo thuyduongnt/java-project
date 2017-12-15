@@ -1,0 +1,162 @@
+package libextend;
+import java.io.*;
+import java.util.*;
+
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.*;
+
+public class ExcelUtils {
+	private static XSSFWorkbook workbook;
+	private static XSSFSheet sheet;
+	private static XSSFRow row;
+	private static XSSFCell cell;
+	
+	public String filePath;
+	FileInputStream ExcelFile;
+	
+	public ExcelUtils(String filePath) {
+		this.filePath = filePath;
+
+		try {
+			ExcelFile = new FileInputStream(filePath);
+			workbook = new XSSFWorkbook(ExcelFile);
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	/*
+	public static Object[][] getTableArray(String filePath, String sheetName, int startRow, int totalRows, int startCol, int totalCols) throws Exception {
+		String[][] tabArray = null;
+		
+		try {
+			FileInputStream ExcelFile = new FileInputStream(filePath);
+			
+			//Access the required test data sheet
+			workbook = new XSSFWorkbook(ExcelFile);
+			sheet = workbook.getSheet(sheetName);
+			
+			//Khoi tao mang du lieu
+			//int totalRows = endRow - startRow;
+			//int totalCols = endCol - startCol;
+			tabArray = new String[totalRows][totalCols];
+			
+			//Doc du lieu theo dong va cot
+			for(int i = startRow; i <= totalRows + startRow - 1; i++) {
+				for(int j = startCol; j < totalCols + startCol; j++) {
+					//row = sheet.getRow(i);
+					//cell = row.getCell(j);
+					//sheet.getRow(i).getCell(j)
+					if(sheet.getRow(i).getCell(j)!=null) {
+						tabArray[i-1][j] = sheet.getRow(i).getCell(j).getStringCellValue();
+					}
+					else {
+						tabArray[i-1][j] = "";
+					}
+				}
+			}
+		}
+		catch(FileNotFoundException e){
+			System.out.println("Could not read the Excel sheet");
+			e.printStackTrace();
+		}
+		catch(IOException e) {
+			System.out.println("Could not read the Excel sheet");
+			e.printStackTrace();
+		}
+		
+		return tabArray;
+	}
+	*/
+	//String filePath, 
+	public static String[][] getTableArray(String sheetName, int startRow, int startCol, int totalRows, int totalCols) throws IOException {
+		String[][] data = null;
+		
+		//FileInputStream ExcelFile = new FileInputStream(filePath);
+		//workbook = new XSSFWorkbook(ExcelFile);
+		sheet = workbook.getSheet(sheetName);
+		
+		Iterator rows = sheet.rowIterator();
+		
+		data = new String[totalRows][totalCols];
+		
+		int rowIndex = startRow;
+		while(rows.hasNext()) {
+			row = (XSSFRow) rows.next();
+			Iterator cells = row.cellIterator();
+			
+			int cellIndex = startCol;
+			while(cells.hasNext()) {
+				cell = (XSSFCell) cells.next();
+				String cellData = "";
+				
+				if(cell.getCellTypeEnum() == CellType.STRING) {
+					cellData = cell.getStringCellValue();
+				}
+				else if(cell.getCellTypeEnum() == CellType.NUMERIC) {
+					cellData = String.valueOf(cell.getNumericCellValue());
+				}
+				else if(cell.getCellTypeEnum() == CellType.BOOLEAN) {
+					cellData = String.valueOf(cell.getBooleanCellValue());
+				}
+				else if(cell.getCellTypeEnum() == CellType.BLANK) {
+					cellData = "";
+				}
+				
+				data[rowIndex][cellIndex] = cellData;
+				cellIndex++;
+			}
+			rowIndex++;
+		}
+		
+		return data;
+	}
+	
+	/*
+	 @DataProvider(name="excelData")
+  public String[][] ExcelData() throws IOException
+  {
+	  InputStream ExcelFileToRead = new FileInputStream("C:\\Selenium Webdriver\\Excel.xls");
+	  HSSFWorkbook wb = new HSSFWorkbook(ExcelFileToRead);
+	  
+	  HSSFSheet sheet=wb.getSheetAt(0);
+		HSSFRow row; 
+		HSSFCell cell;
+
+		Iterator rows = sheet.rowIterator();
+		int totalRow = sheet.getLastRowNum()+1;
+		int totalCol = sheet.getRow(0).getPhysicalNumberOfCells();
+		System.out.println(totalCol);
+		
+		String[][] data = new String[totalRow][totalCol];
+		int rowIndex=0;
+		while (rows.hasNext())
+		{
+			row=(HSSFRow) rows.next();
+			Iterator cells = row.cellIterator();
+			
+			int cellIndex =0;
+			while (cells.hasNext())
+			{
+				cell=(HSSFCell) cells.next();
+				String cellData = "";
+				
+				if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING)
+				{
+					cellData = cell.getStringCellValue();
+				}
+				else if(cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC)
+				{
+					//cellData = cell.getNumericCellValue();
+				}
+				data[rowIndex][cellIndex] = cellData;
+				cellIndex ++;
+			}
+			rowIndex++;
+		}
+	 return data;
+  }
+	 */
+	
+}
